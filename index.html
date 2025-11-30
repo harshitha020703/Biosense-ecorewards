@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BIOSENSE – EcoRewards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background decorative images -->
+  <div class="bg-shape bg-leaf"></div>
+  <div class="bg-shape bg-circle"></div>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="login-modal" class="login-modal">
+    <div class="login-card">
+      <div class="login-left">
+        <h1>BIOSENSE</h1>
+        <p>Turn smart waste segregation<br />into fun eco points 🌱</p>
+        <img src="https://images.pexels.com/photos/112856/pexels-photo-112856.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eco recycling"/>
+      </div>
+
+      <div class="login-right">
+  <div class="auth-switch">
+    <button id="switch-login" class="btn primary active">Login</button>
+    <button id="switch-register" class="btn secondary">Register</button>
+  </div>
+
+  <h2 id="auth-title">Welcome Back</h2>
+  <p id="auth-subtitle" class="login-subtitle">Login to start earning eco points</p>
+
+  <form id="auth-form" onsubmit="return false;">
+    <!-- Full Name (Register only) -->
+    <div class="field auth-name hidden">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" placeholder="e.g. Harshitha Sai" />
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" required />
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" required />
+    </div>
+
+    <!-- Confirm Password (Register only) -->
+    <div class="field auth-confirm hidden">
+      <label for="confirm-password">Confirm Password</label>
+      <input id="confirm-password" type="password" placeholder="••••••••" />
+    </div>
+
+    <button id="submit-btn" class="btn primary wide">Login</button>
+  </form>
+
+  <p class="hint">Secure login using JWT 🔐</p>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-icon">🌱</span>
+      <span class="logo-text">EcoRewards</span>
+    </div>
+
+    <div class="user-info">
+      <div class="user-text">
+        <span id="user-name-display">Guest</span>
+        <span id="user-email-display" class="user-email">Not logged in</span>
+      </div>
+      <button id="logout-btn" class="btn ghost">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="stats-row">
+      <div class="card points-card">
+        <div class="points-icon">⚡</div>
+        <div>
+          <p class="card-label">Eco Points Balance</p>
+          <p id="points-balance" class="points-value">0</p>
+        </div>
+      </div>
+
+      <div class="card summary-card">
+        <p class="card-label">Total Images Classified</p>
+        <p id="total-classified" class="big-number">0</p>
+        <div class="summary-pill-row">
+          <span class="pill pill-green" id="bio-count-pill">Bio: 0</span>
+          <span class="pill pill-yellow" id="nonbio-count-pill">Non-bio: 0</span>
+        </div>
+      </div>
+
+      <div class="card streak-card">
+        <p class="card-label">Today’s Streak</p>
+        <p id="streak-count" class="big-number">0</p>
+        <p class="streak-sub">Classify daily to keep your eco streak alive 🔥</p>
+      </div>
+    </section>
+
+    <section class="upload-section card">
+      <div class="upload-header">
+        <div class="upload-icon">📷</div>
+        <div>
+          <h2>Upload your waste image</h2>
+          <p>Classify & earn eco points for recycling responsibly.</p>
+        </div>
+      </div>
+
+      <div id="drop-zone" class="drop-zone">
+        <p class="drop-main">Drag & drop image here</p>
+        <p class="drop-sub">or click the button below</p>
+        <button id="upload-btn" class="btn secondary">Choose Image</button>
+        <input id="file-input" type="file" accept="image/*" hidden />
+      </div>
+
+      <div class="preview-row">
+        <div class="preview-card">
+          <p class="preview-title">Selected Image</p>
+          <img id="preview-img" src="" alt="Preview" class="preview-img hidden" />
+        </div>
+
+        <div class="result-card">
+          <p class="preview-title">Classification Result</p>
+          <div id="result-container" class="result-container idle">
+            <p class="result-placeholder">No image classified yet.</p>
+          </div>
+          <button id="classify-btn" type="button" class="btn primary wide">
+             Classify & Earn Points</button>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-row">
+      <div class="card rewards-card">
+        <h3>Redeem Your Points</h3>
+        <p class="card-label">Just for fun UI – mention this as future scope</p>
+        <div class="rewards-strip">
+          <div class="reward-item"><span class="reward-icon">🌳</span><p class="reward-title">Plant a Tree</p><p class="reward-points">100 pts</p></div>
+          <div class="reward-item"><span class="reward-icon">🛍️</span><p class="reward-title">Eco Voucher</p><p class="reward-points">75 pts</p></div>
+          <div class="reward-item"><span class="reward-icon">🥤</span><p class="reward-title">Reusable Bottle</p><p class="reward-points">50 pts</p></div>
+          <div class="reward-item"><span class="reward-icon">🚍</span><p class="reward-title">Transit Pass</p><p class="reward-points">60 pts</p></div>
+        </div>
+      </div>
+
+      <div class="card history-card">
+        <h3>Recent Classifications</h3>
+        <ul id="history-list" class="history-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Built with 💚 using HTML, CSS, JS & FastAPI · BIOSENSE EcoRewards</footer>
+  <script src="script.js"></script>
+</body>
+</html>
